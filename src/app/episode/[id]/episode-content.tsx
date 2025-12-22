@@ -105,7 +105,7 @@ export function EpisodePageContent({
               <Button
                 onClick={() => setShareDialogOpen(true)}
                 variant="outline"
-                className="w-full gap-2 bg-muted hover:bg-accent/20 border-border text-foreground"
+                className="w-full gap-2 bg-card hover:bg-accent/10 border-primary/20 text-foreground"
               >
                 <Share2 className="w-4 h-4" />
                 <span>Share Episode</span>
@@ -126,14 +126,15 @@ export function EpisodePageContent({
 
             {/* Episode Image */}
             {episode.imageUrl && (
-              <div className="rounded-lg overflow-hidden shadow-lg">
+              <div className="rounded-lg overflow-hidden shadow-lg aspect-video bg-muted">
                 <Image
                   src={episode.imageUrl}
                   alt={episode.title}
                   width={800}
                   height={450}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                   priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 800px, 800px"
                 />
               </div>
             )}
