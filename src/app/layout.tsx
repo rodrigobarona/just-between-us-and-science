@@ -1,22 +1,29 @@
-import type { Metadata, Viewport } from "next"
-import { Outfit } from "next/font/google"
-import { QueryProvider } from "@/components/providers/query-provider"
-import { Toaster } from "@/components/ui/sonner"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { BASE_URL, SHARE_IMAGE, SITE_TITLE, SITE_DESCRIPTION, RSS_FEED_URL } from "@/lib/schema"
-import "./globals.css"
+import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { Outfit } from "next/font/google";
+import { QueryProvider } from "@/components/providers/query-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import {
+  BASE_URL,
+  SHARE_IMAGE,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  RSS_FEED_URL,
+} from "@/lib/schema";
+import "./globals.css";
 
 const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-outfit",
-})
+});
 
 export const viewport: Viewport = {
   themeColor: "#007a7a",
   width: "device-width",
   initialScale: 1,
-}
+};
 
 export const metadata: Metadata = {
   title: {
@@ -90,12 +97,12 @@ export const metadata: Metadata = {
     "podcast:explicit": "false",
     "podcast:author": "Dr. Patrícia Mota, PT, PhD",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" className={outfit.variable}>
@@ -106,7 +113,8 @@ export default function RootLayout({
             <Toaster />
           </TooltipProvider>
         </QueryProvider>
+        <Analytics />
       </body>
     </html>
-  )
+  );
 }
