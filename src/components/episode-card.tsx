@@ -93,16 +93,13 @@ export function EpisodeCard({ episode, onPlay }: EpisodeCardProps) {
                 <Play className="w-4 h-4" />
                 <span>Listen</span>
               </Button>
-              <Button 
-                asChild
-                variant="outline"
-                className="gap-2"
+              <Link 
+                href={`/episode/${episode.id}`} 
+                className="inline-flex items-center justify-center gap-2 h-9 px-3 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm font-medium"
               >
-                <Link href={`/episode/${episode.id}`} className="inline-flex items-center">
-                  <BookOpen className="w-4 h-4" />
-                  <span>Details</span>
-                </Link>
-              </Button>
+                <BookOpen className="w-4 h-4" />
+                <span>Details</span>
+              </Link>
             </div>
           </div>
         </div>

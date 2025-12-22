@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { ArrowLeft, Home } from "lucide-react"
 
 export default function NotFound() {
@@ -18,18 +17,20 @@ export default function NotFound() {
         </div>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button asChild variant="outline" className="gap-2">
-            <Link href="/" className="inline-flex items-center">
-              <ArrowLeft className="w-4 h-4" />
-              <span>Go Back</span>
-            </Link>
-          </Button>
-          <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2">
-            <Link href="/" className="inline-flex items-center">
-              <Home className="w-4 h-4" />
-              <span>Return to Home</span>
-            </Link>
-          </Button>
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Go Back</span>
+          </Link>
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md bg-accent hover:bg-accent/90 text-accent-foreground"
+          >
+            <Home className="w-4 h-4" />
+            <span>Return to Home</span>
+          </Link>
         </div>
       </div>
     </div>
