@@ -105,7 +105,7 @@ export function EpisodePageContent({
               <Button
                 onClick={() => setShareDialogOpen(true)}
                 variant="outline"
-                className="w-full gap-2 bg-card hover:bg-accent/10 border-primary/20 text-foreground"
+                className="w-full gap-2 border-input bg-background hover:bg-accent hover:text-accent-foreground"
               >
                 <Share2 className="w-4 h-4" />
                 <span>Share Episode</span>
