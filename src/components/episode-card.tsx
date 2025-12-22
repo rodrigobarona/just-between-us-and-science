@@ -48,7 +48,7 @@ export function EpisodeCard({ episode, onPlay }: EpisodeCardProps) {
 
   return (
     <Card id={episode.id} className="overflow-hidden hover:shadow-lg transition-shadow scroll-mt-8">
-      <CardContent className="p-6">
+      <CardContent className="px-6">
         <div className="flex gap-4">
           {episode.imageUrl && (
             <Link href={`/episode/${episode.id}`} className="flex-shrink-0">
