@@ -33,10 +33,9 @@ export function PodcastHeader() {
           <Image
             src="/assets/eleva-care-logo-white.png"
             alt="Eleva Care"
-            width={120}
-            height={24}
-            style={{ width: 'auto', height: '1.5rem' }}
-            className="opacity-90"
+            width={240}
+            height={48}
+            className="h-6 w-auto opacity-90"
           />
         </a>
       </div>

@@ -126,12 +126,12 @@ export function EpisodePageContent({
 
             {/* Episode Image */}
             {episode.imageUrl && (
-              <div className="rounded-lg overflow-hidden shadow-lg aspect-video bg-muted">
+              <div className="rounded-lg overflow-hidden shadow-lg aspect-square bg-muted">
                 <Image
                   src={episode.imageUrl}
                   alt={episode.title}
                   width={800}
-                  height={450}
+                  height={800}
                   className="w-full h-full object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 800px, 800px"
