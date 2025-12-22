@@ -9,6 +9,7 @@ export function HostSection() {
         width={96}
         height={96}
         className="w-24 h-24 rounded-full object-cover border-4 border-accent flex-shrink-0"
+        priority
       />
       <div className="flex-1">
         <h3 className="text-lg font-bold text-foreground mb-2">Host</h3>
