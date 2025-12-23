@@ -40,7 +40,8 @@ export function PlatformLinks() {
               alt={platform.label}
               width={120}
               height={40}
-              style={{ width: 'auto', height: '2.5rem' }}
+              className="h-10 w-auto"
+              priority
             />
           </a>
         ))}

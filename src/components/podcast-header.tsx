@@ -3,14 +3,16 @@ import Image from "next/image"
 export function PodcastHeader() {
   return (
     <div className="space-y-8">
-      <div className="w-full">
+      <div className="w-full aspect-[2/1] relative">
         <Image
           src="/assets/jbus-logo.png"
           alt="Just Between Us ...and Science logo"
           width={800}
           height={400}
-          className="w-full h-auto object-contain"
+          className="object-contain"
           priority
+          fill
+          sizes="(max-width: 768px) 100vw, 400px"
         />
         <p className="text-foreground/95 text-2xl font-light mt-6 text-center">
           The Women&apos;s Health Lab
@@ -35,7 +37,7 @@ export function PodcastHeader() {
             alt="Eleva Care"
             width={240}
             height={48}
-            className="h-6 w-auto opacity-90"
+            className="h-10 w-auto opacity-90"
           />
         </a>
       </div>

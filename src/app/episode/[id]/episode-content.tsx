@@ -126,13 +126,12 @@ export function EpisodePageContent({
 
             {/* Episode Image */}
             {episode.imageUrl && (
-              <div className="rounded-lg overflow-hidden shadow-lg aspect-square bg-muted">
+              <div className="rounded-lg overflow-hidden shadow-lg aspect-square bg-muted relative">
                 <Image
                   src={episode.imageUrl}
                   alt={episode.title}
-                  width={800}
-                  height={800}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 800px, 800px"
                 />
@@ -242,6 +241,7 @@ export function EpisodePageContent({
                             width={80}
                             height={80}
                             className="w-20 h-20 rounded object-cover flex-shrink-0"
+                            loading="lazy"
                           />
                         )}
                         <div className="flex-1 min-w-0">

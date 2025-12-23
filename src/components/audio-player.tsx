@@ -123,6 +123,7 @@ export function AudioPlayer({
                 width={48}
                 height={48}
                 className="w-12 h-12 rounded object-cover flex-shrink-0"
+                loading="lazy"
               />
             )}
             <div className="min-w-0 flex-1">
