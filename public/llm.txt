@@ -29,6 +29,8 @@ This is the official website for "Just Between Us … and Science," a podcast de
 ### Main Pages
 - **Homepage** (`/`): Latest episodes, host information, and platform links
 - **Episode Pages** (`/episode/[id]`): Individual episode pages with audio player, show notes, chapter markers, and transcripts
+- **Episodes List** (`/episodes.md`): Markdown list of all episodes with summaries
+- **Episode Markdown** (`/episode/[id].md`): Detailed markdown content for each episode
 - **RSS Feed**: https://anchor.fm/s/fb6b5228/podcast/rss
 
 ### Technical Details

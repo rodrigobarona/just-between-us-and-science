@@ -96,12 +96,15 @@ Implemented via middleware:
 - ✅ Mobile web app capable
 - ✅ Touch icon support (FAVICON.png)
 
-### 9. **LLM Optimization**
+### 9. **LLM & Markdown Optimization**
 
-- ✅ `llm.txt` file for AI crawlers and assistants
-- ✅ Comprehensive site documentation for LLMs
-- ✅ Structured content description
-- ✅ Clear website purpose and navigation
+- ✅ `/llm.txt` - Root site documentation for AI crawlers
+- ✅ `/episodes.md` - All episodes list with summaries (1 hour cache, markdown format)
+- ✅ `/episode/[id]/md` - Individual episode markdown files (statically generated)
+- ✅ Comprehensive structured content for LLMs and documentation
+- ✅ Clean markdown format with metadata, chapters, and guest info
+- ✅ Uses Next.js 16 route handlers with `generateStaticParams`
+- ✅ Proper `text/markdown` content type
 
 ## 📁 Files Created/Modified
 
@@ -112,6 +115,9 @@ Implemented via middleware:
 - `src/app/manifest.ts` - PWA manifest
 - `src/proxy.ts` - Security and performance headers (Next.js 16 convention)
 - `public/llm.txt` - LLM-friendly site documentation
+- `src/app/episode/[id]/md/route.ts` - Individual episode markdown files
+- `next.config.ts` - Added rewrite rule to map `.md` URLs to `/md` routes
+- `src/app/episodes.md/route.ts` - All episodes aggregated in markdown format
 
 ### Modified Files
 
@@ -167,7 +173,9 @@ Expected improvements:
 - Sitemap: `https://podcast.patriciamota.com/sitemap.xml`
 - Robots: `https://podcast.patriciamota.com/robots.txt`
 - Manifest: `https://podcast.patriciamota.com/manifest.json`
-- LLM File: `https://podcast.patriciamota.com/llm.txt`
+- LLM Site Info: `https://podcast.patriciamota.com/llm.txt`
+- Episodes List (Markdown): `https://podcast.patriciamota.com/episodes.md`
+- Episode Markdown: `https://podcast.patriciamota.com/episode/[id].md`
 - RSS Feed: `https://anchor.fm/s/fb6b5228/podcast/rss`
 
 ## 📊 Testing Tools
@@ -188,7 +196,10 @@ Use these tools to verify SEO implementation:
 3. Test social media cards on Twitter/Facebook
 4. Monitor Core Web Vitals
 5. Set up Google Analytics (if needed)
-6. Consider implementing:
+6. Test markdown endpoints:
+   - Visit `/episodes.md` to see all episodes
+   - Visit `/episode/[any-episode-id].md` for episode details
+7. Consider implementing:
    - Podcast-specific platforms (Apple Podcasts, Spotify)
    - Newsletter integration
    - Comments/engagement features
@@ -198,5 +209,31 @@ Use these tools to verify SEO implementation:
 - All metadata is dynamically generated based on episode content
 - Images are optimized automatically by Next.js
 - The site is fully PWA-capable
-- Security headers are applied to all routes
+- Security headers are applied to all routes via `proxy.ts` (Next.js 16 convention)
 - The favicon is served from `/public/FAVICON.png`
+- Markdown files are statically generated at build time using `generateStaticParams`
+- Each episode gets its own `.md` extension URL for detailed markdown content
+- Uses Next.js rewrites to map `/episode/[id].md` URLs to `/episode/[id]/md` routes
+- Clean URL structure with proper file extension semantics
+- The `/episodes.md` aggregates all episodes with 1-hour cache revalidation
+- Uses proper `text/markdown` content type for better compatibility
+
+## 🤖 LLM & Markdown Integration Details
+
+### Route Structure
+```
+/llm.txt                          → Site overview and navigation (plain text)
+/episodes.md                      → All episodes list (markdown, revalidates hourly)
+/episode/[id].md                  → Individual episode markdown (static)
+```
+
+### Features
+- **Markdown format**: Clean, readable, and universally supported
+- **Proper content type**: `text/markdown; charset=utf-8`
+- **Comprehensive metadata**: Title, date, duration, URLs
+- **Full descriptions**: HTML stripped, entities decoded
+- **Chapter markers**: Timestamped content sections
+- **Guest information**: Names, titles, and links
+- **Static generation**: Pre-rendered at build time for performance
+- **Cache headers**: Optimal cache control for static assets
+- **GitHub compatible**: Renders properly in repos and documentation sites

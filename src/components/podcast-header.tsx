@@ -7,11 +7,9 @@ export function PodcastHeader() {
         <Image
           src="/assets/jbus-logo.png"
           alt="Just Between Us ...and Science logo"
-          width={800}
-          height={400}
+          fill
           className="object-contain"
           priority
-          fill
           sizes="(max-width: 768px) 100vw, 400px"
         />
         <p className="text-foreground/95 text-2xl font-light mt-6 text-center">
