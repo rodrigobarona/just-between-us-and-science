@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const episodeUrls = episodes.map((episode) => ({
     url: `${BASE_URL}/episode/${episode.id}`,
     lastModified: new Date(episode.pubDate),
-    changeFrequency: "monthly" as const,
+    changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
 
@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const episodeMdUrls = episodes.map((episode) => ({
     url: `${BASE_URL}/episode/${episode.id}.md`,
     lastModified: new Date(episode.pubDate),
-    changeFrequency: "monthly" as const,
+    changeFrequency: "weekly" as const,
     priority: 0.6,
   }));
 

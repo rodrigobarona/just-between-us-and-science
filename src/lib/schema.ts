@@ -26,7 +26,7 @@ export const HOST = {
   fullName: "Dr. Patrícia Mota, PT, PhD",
   description:
     "Physical Therapist and PhD specializing in women's health research",
-  twitter: "https://twitter.com/patimota",
+  twitter: "https://x.com/patimota",
 } as const;
 
 // Producer/Sponsor information

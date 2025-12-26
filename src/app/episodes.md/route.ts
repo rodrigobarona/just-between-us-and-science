@@ -95,7 +95,7 @@ ${SITE_DESCRIPTION}
 
 ${HOST.description}
 
-- Twitter: [@patimota](${HOST.twitter})
+- X/Twitter: [@patimota](${HOST.twitter})
 
 ---
 

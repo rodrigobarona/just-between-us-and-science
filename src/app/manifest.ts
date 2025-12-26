@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Just Between Us … and Science: The Women's Health Lab",
+    name: "Just Between Us …and Science: The Women's Health Lab",
     short_name: "JBUS Podcast",
     description:
       "Join Dr. Patrícia Mota, PT, PhD, as she takes you behind the scenes of women's health — from the latest research to everyday experiences.",

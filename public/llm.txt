@@ -11,7 +11,7 @@ This is the official website for "Just Between Us … and Science: The Women's H
 | Role | Name | Link |
 |------|------|------|
 | **Podcast Name** | Just Between Us … and Science: The Women's Health Lab | — |
-| **Host** | Dr. Patrícia Mota, PT, PhD | [@patimota](https://twitter.com/patimota) |
+| **Host** | Dr. Patrícia Mota, PT, PhD | [@patimota](https://x.com/patimota) |
 | **Brought to you by** | Eleva Care | https://eleva.care |
 
 ## Quick Access
@@ -29,7 +29,7 @@ This is the official website for "Just Between Us … and Science: The Women's H
 - Physical Therapist specializing in women's health
 - PhD in women's health research
 - Evidence-based approach to health education
-- Twitter: @patimota
+- X/Twitter: @patimota
 
 ## Producer
 
@@ -115,7 +115,7 @@ No authentication required. Standard CDN caching applies:
 ## Contact
 
 - Website: https://podcast.patriciamota.com
-- Twitter: @patimota
+- X/Twitter: @patimota
 - Producer: Eleva Care (https://eleva.care)
 
 ---
