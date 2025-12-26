@@ -1,4 +1,4 @@
-import { getEpisode, getEpisodes } from "@/lib/rss";
+import { getEpisode } from "@/lib/rss";
 import {
   SITE_TITLE,
   SITE_DESCRIPTION,
