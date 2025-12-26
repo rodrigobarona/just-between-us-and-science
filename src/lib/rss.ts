@@ -65,6 +65,18 @@ function generateSlug(title: string): string {
     .trim();
 }
 
+// Decode HTML entities in text
+function decodeHtmlEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, " ");
+}
+
 // Parse chapter timestamps from description: "(03:23) Title"
 function parseChapters(description: string): Chapter[] {
   const chapterRegex = /\((\d{1,2}:\d{2}(?::\d{2})?)\)\s*([^\n<]+)/g;
@@ -81,13 +93,18 @@ function parseChapters(description: string): Chapter[] {
 
     // Extract emoji if present
     const emojiMatch = title.match(/^(\p{Emoji})\s*/u);
+    
+    // Decode HTML entities in title
+    const decodedTitle = decodeHtmlEntities(
+      emojiMatch
+        ? title.replace(emojiMatch[0], "").trim()
+        : title.trim()
+    );
 
     chapters.push({
       time,
       seconds,
-      title: emojiMatch
-        ? title.replace(emojiMatch[0], "").trim()
-        : title.trim(),
+      title: decodedTitle,
       emoji: emojiMatch?.[1],
     });
   }
