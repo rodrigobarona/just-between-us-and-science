@@ -1,25 +1,27 @@
-import Image from "next/image"
+import Image from "next/image";
+import { PLATFORM_LINKS } from "@/lib/schema";
 
+// Platform links with optional tracking parameters for component use
 const platforms = [
   {
     name: "Spotify",
-    url: "https://open.spotify.com/show/2PMAy4HFeiu8IAf8Ic8Fqo?go=1",
+    url: `${PLATFORM_LINKS.spotify}?go=1`, // Tracking parameter
     badge: "/assets/spotify-badge.svg",
     label: "Listen on Spotify",
   },
   {
     name: "Apple Podcasts",
-    url: "https://podcasts.apple.com/us/podcast/elevating-womens-health/id1770183816?uo=4",
+    url: `${PLATFORM_LINKS.apple}?uo=4`, // UTM tracking parameter
     badge: "/assets/apple-badge.svg",
     label: "Listen on Apple Podcasts",
   },
   {
     name: "YouTube",
-    url: "https://www.youtube.com/@patimota?sub_confirmation=1",
+    url: `${PLATFORM_LINKS.youtube}?sub_confirmation=1`, // Subscription confirmation
     badge: "/assets/youtube-badge.svg",
     label: "Watch on YouTube",
   },
-]
+] as const;
 
 export function PlatformLinks() {
   return (
