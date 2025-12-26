@@ -7,6 +7,7 @@ import {
   BASE_URL,
   SHARE_IMAGE,
   SITE_TITLE,
+  HOST,
 } from "@/lib/schema";
 import { EpisodePageContent } from "./episode-content";
 
@@ -61,7 +62,7 @@ export async function generateMetadata({
     "women's health",
     "podcast episode",
     "health science",
-    "Dr. Patrícia Mota",
+    HOST.name,
     "evidence-based medicine",
   ];
   const episodeKeywords = episode.keywords || [];
@@ -72,7 +73,7 @@ export async function generateMetadata({
   return {
     title: episode.title,
     description,
-    authors: [{ name: "Dr. Patrícia Mota, PT, PhD" }],
+    authors: [{ name: HOST.fullName }],
     keywords: allKeywords,
     openGraph: {
       type: "article",
@@ -82,7 +83,7 @@ export async function generateMetadata({
       siteName: SITE_TITLE,
       publishedTime: episode.pubDate,
       modifiedTime: episode.pubDate,
-      authors: ["Dr. Patrícia Mota, PT, PhD"],
+      authors: [HOST.fullName],
       section: "Health & Fitness",
       tags: episodeKeywords.length > 0 ? episodeKeywords : undefined,
       images: [

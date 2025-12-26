@@ -10,6 +10,7 @@ import {
   SITE_TITLE,
   SITE_DESCRIPTION,
   RSS_FEED_URL,
+  HOST,
 } from "@/lib/schema";
 import "./globals.css";
 
@@ -31,9 +32,9 @@ export const metadata: Metadata = {
     template: `%s | Just Between Us … and Science`,
   },
   description: SITE_DESCRIPTION,
-  authors: [{ name: "Dr. Patrícia Mota, PT, PhD" }],
-  creator: "Dr. Patrícia Mota",
-  publisher: "Just Between Us … and Science",
+  authors: [{ name: HOST.fullName }],
+  creator: HOST.name,
+  publisher: SITE_TITLE,
   keywords: [
     "women's health",
     "podcast",
@@ -123,7 +124,7 @@ export const metadata: Metadata = {
   other: {
     "podcast:category": "Health & Fitness > Medicine",
     "podcast:explicit": "false",
-    "podcast:author": "Dr. Patrícia Mota, PT, PhD",
+    "podcast:author": HOST.fullName,
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "apple-mobile-web-app-title": "JBUS Podcast",

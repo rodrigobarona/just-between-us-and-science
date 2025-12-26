@@ -1,5 +1,13 @@
 import { getEpisodes } from "@/lib/rss";
-import { SITE_TITLE, BASE_URL, SITE_DESCRIPTION, PLATFORM_LINKS, RSS_FEED_URL } from "@/lib/schema";
+import {
+  SITE_TITLE,
+  BASE_URL,
+  SITE_DESCRIPTION,
+  PLATFORM_LINKS,
+  RSS_FEED_URL,
+  HOST,
+  PRODUCER,
+} from "@/lib/schema";
 
 // Use edge runtime for faster global response times
 export const runtime = "edge";
@@ -19,11 +27,12 @@ export async function GET() {
         .slice(0, 200)
         .trim();
 
-      const seasonEpisode = ep.season && ep.episode
-        ? `S${ep.season}E${ep.episode}`
-        : ep.episode
-        ? `E${ep.episode}`
-        : "";
+      const seasonEpisode =
+        ep.season && ep.episode
+          ? `S${ep.season}E${ep.episode}`
+          : ep.episode
+          ? `E${ep.episode}`
+          : "";
 
       const keywords = ep.keywords?.length
         ? `\n**Topics:** ${ep.keywords.slice(0, 5).join(", ")}`
@@ -33,7 +42,11 @@ export async function GET() {
 
 | Property | Value |
 |----------|-------|
-| Published | ${new Date(ep.pubDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} |
+| Published | ${new Date(ep.pubDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })} |
 | Duration | ${ep.duration || "N/A"} |
 | Web Page | ${BASE_URL}/episode/${ep.id} |
 | Markdown | ${BASE_URL}/episode/${ep.id}.md |
@@ -49,6 +62,16 @@ ${cleanDescription}${cleanDescription.length >= 200 ? "…" : ""}
   const text = `# ${SITE_TITLE}
 
 > *This document is designed for AI assistants, language models, and programmatic access. For the interactive website, visit [${BASE_URL}](${BASE_URL}).*
+
+---
+
+## Credits
+
+| Role | Value |
+|------|-------|
+| **Podcast** | ${SITE_TITLE} |
+| **Host** | ${HOST.fullName} |
+| **Brought to you by** | [${PRODUCER.name}](${PRODUCER.url}) |
 
 ---
 
@@ -68,12 +91,11 @@ ${SITE_DESCRIPTION}
 
 ## Host
 
-**Dr. Patrícia Mota, PT, PhD**
+**${HOST.fullName}**
 
-- Physical Therapist specializing in women's health
-- PhD in women's health research
-- Evidence-based approach to health education
-- Twitter: [@patimota](https://twitter.com/patimota)
+${HOST.description}
+
+- Twitter: [@patimota](${HOST.twitter})
 
 ---
 
@@ -119,7 +141,7 @@ The content of this podcast is for informational and educational purposes only. 
 
 ---
 
-**Producer:** [Eleva Care](https://eleva.care)
+**Brought to you by [${PRODUCER.name}](${PRODUCER.url})**
 
 Last Updated: ${new Date().toISOString()}
 `;
@@ -127,7 +149,8 @@ Last Updated: ${new Date().toISOString()}
   return new Response(text, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+      "Cache-Control":
+        "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

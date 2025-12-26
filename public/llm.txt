@@ -4,7 +4,15 @@
 
 ## Overview
 
-This is the official website for "Just Between Us … and Science," a women's health podcast hosted by Dr. Patrícia Mota, PT, PhD. The podcast delivers evidence-based health education covering pregnancy, postpartum, pelvic health, hormones, and physical therapy.
+This is the official website for "Just Between Us … and Science: The Women's Health Lab," a women's health podcast. The podcast delivers evidence-based health education covering pregnancy, postpartum, pelvic health, hormones, and physical therapy.
+
+## Credits
+
+| Role | Name | Link |
+|------|------|------|
+| **Podcast Name** | Just Between Us … and Science: The Women's Health Lab | — |
+| **Host** | Dr. Patrícia Mota, PT, PhD | [@patimota](https://twitter.com/patimota) |
+| **Brought to you by** | Eleva Care | https://eleva.care |
 
 ## Quick Access
 
@@ -22,6 +30,12 @@ This is the official website for "Just Between Us … and Science," a women's he
 - PhD in women's health research
 - Evidence-based approach to health education
 - Twitter: @patimota
+
+## Producer
+
+**Eleva Care** — https://eleva.care
+
+The podcast is brought to you by Eleva Care, supporting women's health education and research.
 
 ## Content Focus
 

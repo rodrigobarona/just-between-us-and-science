@@ -1,5 +1,12 @@
 import { getEpisode, getEpisodes } from "@/lib/rss";
-import { SITE_TITLE, SITE_DESCRIPTION, BASE_URL, PLATFORM_LINKS } from "@/lib/schema";
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  BASE_URL,
+  PLATFORM_LINKS,
+  HOST,
+  PRODUCER,
+} from "@/lib/schema";
 
 // Use edge runtime for faster global response times
 export const runtime = "edge";
@@ -19,10 +26,13 @@ export async function GET(
   const episode = await getEpisode(id);
 
   if (!episode) {
-    return new Response("# Episode Not Found\n\nThe requested episode could not be found.", {
-      status: 404,
-      headers: { "Content-Type": "text/markdown; charset=utf-8" },
-    });
+    return new Response(
+      "# Episode Not Found\n\nThe requested episode could not be found.",
+      {
+        status: 404,
+        headers: { "Content-Type": "text/markdown; charset=utf-8" },
+      }
+    );
   }
 
   // Clean HTML entities and tags from description
@@ -49,16 +59,19 @@ export async function GET(
     ? `## Chapters
 
 ${episode.chapters
-    .map((ch, i) => {
-      const hours = Math.floor(ch.seconds / 3600);
-      const minutes = Math.floor((ch.seconds % 3600) / 60);
-      const seconds = ch.seconds % 60;
-      const timestamp = hours > 0
-        ? `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+  .map((ch, i) => {
+    const hours = Math.floor(ch.seconds / 3600);
+    const minutes = Math.floor((ch.seconds % 3600) / 60);
+    const seconds = ch.seconds % 60;
+    const timestamp =
+      hours > 0
+        ? `${hours}:${String(minutes).padStart(2, "0")}:${String(
+            seconds
+          ).padStart(2, "0")}`
         : `${minutes}:${String(seconds).padStart(2, "0")}`;
-      return `${i + 1}. **[${timestamp}]** ${ch.title}`;
-    })
-    .join("\n")}
+    return `${i + 1}. **[${timestamp}]** ${ch.title}`;
+  })
+  .join("\n")}
 `
     : "";
 
@@ -66,13 +79,17 @@ ${episode.chapters
   const guestSection = episode.guest
     ? `## Featured Guest
 
-**${episode.guest.name}**${episode.guest.title ? ` — ${episode.guest.title}` : ""}
+**${episode.guest.name}**${
+        episode.guest.title ? ` — ${episode.guest.title}` : ""
+      }
 
-${episode.guest.links?.length
+${
+  episode.guest.links?.length
     ? `### Connect with ${episode.guest.name.split(" ")[0]}
 
 ${episode.guest.links.map((l) => `- **${l.platform}:** ${l.url}`).join("\n")}`
-    : ""}`
+    : ""
+}`
     : "";
 
   // Build keywords section
@@ -83,11 +100,12 @@ ${episode.keywords.map((k) => `- ${k}`).join("\n")}`
     : "";
 
   // Build episode label
-  const episodeLabel = episode.season && episode.episode
-    ? `Season ${episode.season}, Episode ${episode.episode}`
-    : episode.episode
-    ? `Episode ${episode.episode}`
-    : "";
+  const episodeLabel =
+    episode.season && episode.episode
+      ? `Season ${episode.season}, Episode ${episode.episode}`
+      : episode.episode
+      ? `Episode ${episode.episode}`
+      : "";
 
   const text = `# ${episode.title}
 
@@ -126,10 +144,16 @@ ${keywordsSection}
 
 ${SITE_DESCRIPTION}
 
+| Role | Value |
+|------|-------|
+| **Host** | ${HOST.fullName} |
+| **Brought to you by** | [${PRODUCER.name}](${PRODUCER.url}) |
+
 ### Host
 
-**Dr. Patrícia Mota, PT, PhD**  
-Physical Therapist specializing in women's health research and evidence-based education.
+**${HOST.fullName}**
+
+${HOST.description}
 
 ### Listen on Your Favorite Platform
 
@@ -149,6 +173,8 @@ The content of this podcast is for informational and educational purposes only. 
 
 ---
 
+**Brought to you by [${PRODUCER.name}](${PRODUCER.url})**
+
 *This document is optimized for AI assistants and language models. For the full interactive experience, visit the [episode page](${BASE_URL}/episode/${id}).*
 
 Last Updated: ${formattedDate}
@@ -157,8 +183,8 @@ Last Updated: ${formattedDate}
   return new Response(text, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+      "Cache-Control":
+        "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }
-

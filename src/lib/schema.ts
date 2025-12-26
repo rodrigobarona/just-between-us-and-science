@@ -19,6 +19,23 @@ export const PLATFORM_LINKS = {
   youtube: "https://www.youtube.com/@patimota",
 } as const;
 
+// Host information
+export const HOST = {
+  name: "Dr. Patrícia Mota",
+  credentials: "PT, PhD",
+  fullName: "Dr. Patrícia Mota, PT, PhD",
+  description:
+    "Physical Therapist and PhD specializing in women's health research",
+  twitter: "https://twitter.com/patimota",
+} as const;
+
+// Producer/Sponsor information
+export const PRODUCER = {
+  name: "Eleva Care",
+  url: "https://eleva.care",
+  logo: "/assets/eleva-care-logo-white.png",
+} as const;
+
 export function buildPodcastSeriesSchema(): WithContext<PodcastSeries> {
   return {
     "@context": "https://schema.org",
@@ -44,25 +61,32 @@ export function buildPodcastSeriesSchema(): WithContext<PodcastSeries> {
       PLATFORM_LINKS.youtube,
       BASE_URL,
     ],
+    // Host is the author/creator
     author: {
       "@type": "Person",
-      name: "Dr. Patrícia Mota",
-      jobTitle: "PT, PhD",
-      description:
-        "Physical Therapist and PhD specializing in women's health research",
-      sameAs: [PLATFORM_LINKS.youtube, "https://twitter.com/patimota"],
+      name: HOST.name,
+      jobTitle: HOST.credentials,
+      description: HOST.description,
+      sameAs: [PLATFORM_LINKS.youtube, HOST.twitter],
     },
     genre: ["Health", "Science", "Education", "Women's Health"],
     keywords:
       "women's health, pregnancy, postpartum, pelvic health, hormones, evidence-based medicine, physical therapy",
+    // Eleva Care is the producer/sponsor ("Brought to you by")
     publisher: {
       "@type": "Organization",
-      name: "Eleva Care",
-      url: "https://eleva.care",
+      name: PRODUCER.name,
+      url: PRODUCER.url,
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/assets/eleva-care-logo-white.png`,
+        url: `${BASE_URL}${PRODUCER.logo}`,
       },
+    },
+    // Also add as funder/sponsor for clarity
+    funder: {
+      "@type": "Organization",
+      name: PRODUCER.name,
+      url: PRODUCER.url,
     },
     webFeed: RSS_FEED_URL,
     // Potential action for podcast apps
@@ -156,20 +180,22 @@ export function buildPodcastEpisodeSchema(
       name: `${episode.title} - Show Notes & Transcript`,
       description: "Detailed show notes and episode content in markdown format",
     },
+    // Producer/Sponsor ("Brought to you by Eleva Care")
     publisher: {
       "@type": "Organization",
-      name: "Eleva Care",
-      url: "https://eleva.care",
+      name: PRODUCER.name,
+      url: PRODUCER.url,
       logo: {
         "@type": "ImageObject",
-        url: `${BASE_URL}/assets/eleva-care-logo-white.png`,
+        url: `${BASE_URL}${PRODUCER.logo}`,
       },
     },
+    // Host is the creator
     creator: {
       "@type": "Person",
-      name: "Dr. Patrícia Mota",
-      jobTitle: "PT, PhD",
-      sameAs: ["https://twitter.com/patimota", PLATFORM_LINKS.youtube],
+      name: HOST.name,
+      jobTitle: HOST.credentials,
+      sameAs: [HOST.twitter, PLATFORM_LINKS.youtube],
     },
     // Keywords/topics from episode metadata
     ...(episode.keywords?.length && {
