@@ -60,6 +60,7 @@ export function EpisodeCard({ episode, onPlay }: EpisodeCardProps) {
                 alt={episode.title}
                 width={96}
                 height={96}
+                sizes="96px"
                 className="w-24 h-24 rounded object-cover shrink-0 hover:opacity-80 transition-opacity cursor-pointer"
                 loading="lazy"
               />

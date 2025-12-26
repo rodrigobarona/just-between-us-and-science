@@ -240,6 +240,7 @@ export function EpisodePageContent({
                             alt={ep.title}
                             width={80}
                             height={80}
+                            sizes="80px"
                             className="w-20 h-20 rounded object-cover flex-shrink-0"
                             loading="lazy"
                           />

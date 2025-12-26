@@ -122,6 +122,7 @@ export function AudioPlayer({
                 alt={episode.title}
                 width={48}
                 height={48}
+                sizes="48px"
                 className="w-12 h-12 rounded object-cover flex-shrink-0"
                 loading="lazy"
               />

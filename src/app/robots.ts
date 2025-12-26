@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next'
 import { BASE_URL } from '@/lib/schema'
 
+// Use edge runtime for faster global response times
+export const runtime = 'edge'
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [

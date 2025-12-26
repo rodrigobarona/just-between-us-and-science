@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const episodes = await getEpisodes()
+  const episodes = await getEpisodes(20) // Limit for homepage performance
 
   return (
     <>

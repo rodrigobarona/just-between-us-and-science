@@ -1,6 +1,8 @@
 import { getEpisodes } from "@/lib/rss";
-import { SITE_TITLE, BASE_URL, SITE_DESCRIPTION } from "@/lib/schema";
+import { SITE_TITLE, BASE_URL, SITE_DESCRIPTION, PLATFORM_LINKS, RSS_FEED_URL } from "@/lib/schema";
 
+// Use edge runtime for faster global response times
+export const runtime = "edge";
 export const dynamic = "force-static";
 export const revalidate = 3600; // Revalidate every hour
 
@@ -13,25 +15,31 @@ export async function GET() {
         .replace(/<[^>]*>/g, "")
         .replace(/&nbsp;/g, " ")
         .replace(/&amp;/g, "&")
+        .replace(/\s+/g, " ")
         .slice(0, 200)
         .trim();
 
-      return `
-## Episode ${ep.episode}: ${ep.title}
+      const seasonEpisode = ep.season && ep.episode
+        ? `S${ep.season}E${ep.episode}`
+        : ep.episode
+        ? `E${ep.episode}`
+        : "";
 
-**Published:** ${new Date(ep.pubDate).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })}
+      const keywords = ep.keywords?.length
+        ? `\n**Topics:** ${ep.keywords.slice(0, 5).join(", ")}`
+        : "";
 
-**Duration:** ${ep.duration || "N/A"}
+      return `### ${seasonEpisode ? `[${seasonEpisode}] ` : ""}${ep.title}
 
-**URL:** ${BASE_URL}/episode/${ep.id}
+| Property | Value |
+|----------|-------|
+| Published | ${new Date(ep.pubDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} |
+| Duration | ${ep.duration || "N/A"} |
+| Web Page | ${BASE_URL}/episode/${ep.id} |
+| Markdown | ${BASE_URL}/episode/${ep.id}.md |
+${keywords}
 
-**Markdown:** ${BASE_URL}/episode/${ep.id}.md
-
-${cleanDescription}${cleanDescription.length >= 200 ? "..." : ""}
+${cleanDescription}${cleanDescription.length >= 200 ? "…" : ""}
 
 ---
 `;
@@ -40,48 +48,86 @@ ${cleanDescription}${cleanDescription.length >= 200 ? "..." : ""}
 
   const text = `# ${SITE_TITLE}
 
+> *This document is designed for AI assistants, language models, and programmatic access. For the interactive website, visit [${BASE_URL}](${BASE_URL}).*
+
+---
+
+## About
+
 ${SITE_DESCRIPTION}
 
-**Website:** ${BASE_URL}
-**RSS Feed:** https://anchor.fm/s/fb6b5228/podcast/rss
-**Total Episodes:** ${episodes.length}
+| Property | Value |
+|----------|-------|
+| Website | ${BASE_URL} |
+| RSS Feed | ${RSS_FEED_URL} |
+| Total Episodes | ${episodes.length} |
+| Language | English (en-US) |
+| Category | Health & Fitness > Medicine |
 
 ---
 
 ## Host
 
-Dr. Patrícia Mota, PT, PhD
+**Dr. Patrícia Mota, PT, PhD**
+
 - Physical Therapist specializing in women's health
+- PhD in women's health research
 - Evidence-based approach to health education
-- Twitter: @patimota
+- Twitter: [@patimota](https://twitter.com/patimota)
 
 ---
 
-## All Episodes
+## Topics Covered
+
+This podcast covers topics including:
+- Women's health research
+- Pregnancy and postpartum care
+- Pelvic floor health
+- Hormonal health and menopause
+- Physical therapy and rehabilitation
+- Evidence-based medicine
+- Health misconceptions
+
+---
+
+## Episode Index
 
 ${episodesList}
 
-## Listen
+## Listening Platforms
 
-- **Spotify:** https://open.spotify.com/show/2PMAy4HFeiu8IAf8Ic8Fqo
-- **Apple Podcasts:** https://podcasts.apple.com/us/podcast/elevating-womens-health/id1770183816
-- **YouTube:** https://www.youtube.com/@patimota
+| Platform | Link |
+|----------|------|
+| Spotify | ${PLATFORM_LINKS.spotify} |
+| Apple Podcasts | ${PLATFORM_LINKS.apple} |
+| YouTube | ${PLATFORM_LINKS.youtube} |
 
 ---
 
-For detailed information about any episode, visit: ${BASE_URL}/episode/[id].md
+## For AI Assistants
 
-Last Updated: ${new Date().toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })}
+- **Episode details:** Access \`${BASE_URL}/episode/{episode-id}.md\` for full show notes, chapters, and guest info
+- **This index:** \`${BASE_URL}/episodes.md\` (refreshed hourly)
+- **Structured data:** Each web page includes JSON-LD PodcastEpisode schema
+- **RSS feed:** ${RSS_FEED_URL}
+
+---
+
+## Medical Disclaimer
+
+The content of this podcast is for informational and educational purposes only. It is not intended as medical advice. Always consult a qualified healthcare provider for personal medical decisions.
+
+---
+
+**Producer:** [Eleva Care](https://eleva.care)
+
+Last Updated: ${new Date().toISOString()}
 `;
 
   return new Response(text, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

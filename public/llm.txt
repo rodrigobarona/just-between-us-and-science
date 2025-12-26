@@ -1,10 +1,19 @@
 # Just Between Us … and Science: The Women's Health Lab
 
-> A podcast by Dr. Patrícia Mota, PT, PhD
+> LLM-optimized documentation for AI assistants and language models
 
 ## Overview
 
-This is the official website for "Just Between Us … and Science," a podcast dedicated to women's health, hosted by Dr. Patrícia Mota. The podcast explores the latest research in women's health, from pregnancy and postpartum to hormones and pelvic health, making science accessible and practical.
+This is the official website for "Just Between Us … and Science," a women's health podcast hosted by Dr. Patrícia Mota, PT, PhD. The podcast delivers evidence-based health education covering pregnancy, postpartum, pelvic health, hormones, and physical therapy.
+
+## Quick Access
+
+| Resource | URL | Description |
+|----------|-----|-------------|
+| Website | https://podcast.patriciamota.com | Main interactive site |
+| Episode Index | https://podcast.patriciamota.com/episodes.md | All episodes in markdown |
+| RSS Feed | https://anchor.fm/s/fb6b5228/podcast/rss | Standard podcast RSS |
+| Sitemap | https://podcast.patriciamota.com/sitemap.xml | XML sitemap |
 
 ## Host
 
@@ -16,86 +25,85 @@ This is the official website for "Just Between Us … and Science," a podcast de
 
 ## Content Focus
 
-- Women's health research
-- Evidence-based medicine
-- Pelvic health
-- Pregnancy and postpartum care
-- Hormones and women's wellness
-- Physical therapy and physiotherapy
-- Health science education
+Primary topics covered:
+- Women's health research and latest findings
+- Pregnancy, birth, and postpartum recovery
+- Pelvic floor health and rehabilitation
+- Hormonal health (menstrual cycle, perimenopause, menopause)
+- Physical therapy and exercise
+- Evidence-based medicine vs. health misconceptions
 
-## Website Structure
+## URL Structure
 
-### Main Pages
-- **Homepage** (`/`): Latest episodes, host information, and platform links
-- **Episode Pages** (`/episode/[id]`): Individual episode pages with audio player, show notes, chapter markers, and transcripts
-- **Episodes List** (`/episodes.md`): Markdown list of all episodes with summaries
-- **Episode Markdown** (`/episode/[id].md`): Detailed markdown content for each episode
-- **RSS Feed**: https://anchor.fm/s/fb6b5228/podcast/rss
+### Web Pages
+- **Homepage:** `/`
+- **Episode page:** `/episode/{episode-slug}`
 
-### Technical Details
-- Built with Next.js 16 and React 19
-- Styled with Tailwind CSS
-- Deployed on Vercel
-- Optimized for SEO and performance
-- PWA-capable with manifest and service worker support
+### AI/LLM-Optimized Endpoints
+- **Episode index (markdown):** `/episodes.md` — Full list with summaries, updated hourly
+- **Episode detail (markdown):** `/episode/{episode-slug}.md` — Show notes, chapters, guest info
 
-### Available Platforms
-- Spotify: https://open.spotify.com/show/2PMAy4HFeiu8IAf8Ic8Fqo
-- Apple Podcasts: https://podcasts.apple.com/us/podcast/elevating-womens-health/id1770183816
-- YouTube: https://www.youtube.com/@patimota
+### Example Episode URLs
+```
+Web:      https://podcast.patriciamota.com/episode/hormones-and-exercise
+Markdown: https://podcast.patriciamota.com/episode/hormones-and-exercise.md
+```
 
-## Data Sources
+## Structured Data
 
-The website pulls episode data from an RSS feed and displays:
-- Episode titles and descriptions
-- Audio files for streaming
-- Publication dates
+All pages include JSON-LD structured data:
+- Homepage: `PodcastSeries` schema with platform links and author info
+- Episode pages: `PodcastEpisode` schema with chapters, guests, and media
+
+## Episode Data Available
+
+Each episode includes:
+- Title and description
+- Publication date
+- Duration (ISO 8601 format in schema)
+- Audio file URL (MP3)
 - Episode artwork
-- Chapter markers (when available)
-- Guest information (when applicable)
-- Transcripts (when available)
+- Season and episode numbers (when applicable)
+- Chapter markers with timestamps (when available)
+- Guest information with social links (when applicable)
+- Topic keywords
 
-## Content Categories
+## Listening Platforms
 
-### Topics Covered
-1. Women's Health Research
-2. Pregnancy and Birth
-3. Postpartum Recovery
-4. Pelvic Floor Health
-5. Hormonal Health
-6. Exercise and Movement
-7. Physical Therapy
-8. Evidence-Based Medicine
-9. Health Misconceptions
-10. Patient Education
+| Platform | URL |
+|----------|-----|
+| Spotify | https://open.spotify.com/show/2PMAy4HFeiu8IAf8Ic8Fqo |
+| Apple Podcasts | https://podcasts.apple.com/us/podcast/elevating-womens-health/id1770183816 |
+| YouTube | https://www.youtube.com/@patimota |
 
 ## Producer
 
 **Eleva Care**
 Website: https://eleva.care
 
-## Contact & Social
+## Technical Stack
 
-- Website: https://podcast.patriciamota.com
-- Twitter: @patimota
-- Production: Eleva Care
-
-## Technical Features
-
-- Responsive design for mobile and desktop
-- Audio player with chapter navigation
-- Episode search and filtering
-- Share functionality for social media
-- Structured data for search engines
-- RSS feed integration
-- Analytics tracking
+- Built with Next.js 16 and React 19
+- Styled with Tailwind CSS
+- Deployed on Vercel
+- PWA-capable
 
 ## Content Policy
 
-All content is based on evidence-based research and current scientific literature. The podcast aims to educate and inform, not to replace medical advice. Listeners are encouraged to consult with their healthcare providers for personal medical decisions.
+All content is based on peer-reviewed research and current scientific literature. The podcast is educational and does not replace medical advice. Listeners should consult healthcare providers for personal medical decisions.
+
+## Rate Limits
+
+No authentication required. Standard CDN caching applies:
+- Markdown endpoints: 1 hour cache, hourly revalidation
+- Web pages: Static generation with ISR
+
+## Contact
+
+- Website: https://podcast.patriciamota.com
+- Twitter: @patimota
+- Producer: Eleva Care (https://eleva.care)
 
 ---
 
-Last Updated: December, 26th, 2025
-
+Last Updated: 2025-12-26
