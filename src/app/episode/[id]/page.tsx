@@ -35,30 +35,54 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: episode.title,
     description,
     authors: [{ name: "Dr. Patrícia Mota, PT, PhD" }],
+    keywords: [
+      "women's health",
+      "podcast episode",
+      "health science",
+      "Dr. Patrícia Mota",
+      episode.title,
+    ],
     openGraph: {
       type: "article",
       title: episode.title,
       description,
       url: pageUrl,
-      siteName: "Just Between Us … and Science",
+      siteName: SITE_TITLE,
       publishedTime: episode.pubDate,
+      authors: ["Dr. Patrícia Mota, PT, PhD"],
       images: [
         {
           url: imageUrl,
           width: 1200,
           height: 630,
           alt: episode.title,
+          type: "image/png",
         },
       ],
+      locale: "en_US",
     },
     twitter: {
       card: "summary_large_image",
+      site: "@patimota",
+      creator: "@patimota",
       title: episode.title,
       description,
       images: [imageUrl],
     },
     alternates: {
       canonical: pageUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
   }
 }

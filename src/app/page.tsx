@@ -1,11 +1,25 @@
+import type { Metadata } from "next"
 import { getEpisodes } from "@/lib/rss"
 import { JsonLd } from "@/components/json-ld"
-import { buildPodcastSeriesSchema } from "@/lib/schema"
+import { buildPodcastSeriesSchema, BASE_URL, SITE_TITLE, SITE_DESCRIPTION, SHARE_IMAGE } from "@/lib/schema"
 import { PodcastHeader } from "@/components/podcast-header"
 import { HostSection } from "@/components/host-section"
 import { PlatformLinks } from "@/components/platform-links"
 import { Footer } from "@/components/footer"
 import { EpisodeList } from "@/components/episode-list"
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: BASE_URL,
+  },
+  openGraph: {
+    url: BASE_URL,
+    type: "website",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [SHARE_IMAGE],
+  },
+}
 
 export default async function HomePage() {
   const episodes = await getEpisodes()

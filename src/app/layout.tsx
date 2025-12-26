@@ -45,8 +45,19 @@ export const metadata: Metadata = {
     "hormones",
     "physical therapy",
     "physiotherapy",
+    "Dr. Patrícia Mota",
+    "women's health research",
+    "health education",
+    "medical podcast",
   ],
   metadataBase: new URL(BASE_URL),
+  applicationName: "Just Between Us … and Science",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -60,22 +71,26 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Just Between Us and Science Podcast with Dr. Patrícia Mota",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@patimota",
+    creator: "@patimota",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: [SHARE_IMAGE],
-    creator: "@patimota",
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
@@ -84,18 +99,35 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
     types: {
-      "application/rss+xml": RSS_FEED_URL,
+      "application/rss+xml": [
+        {
+          url: RSS_FEED_URL,
+          title: `${SITE_TITLE} RSS Feed`,
+        },
+      ],
     },
   },
   icons: {
-    icon: "/FAVICON.png",
-    apple: "/FAVICON.png",
+    icon: [{ url: "/FAVICON.png", type: "image/png" }],
+    apple: [{ url: "/FAVICON.png", type: "image/png" }],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/FAVICON.png",
+      },
+    ],
   },
+  manifest: "/manifest.json",
   category: "Health & Fitness",
+  classification: "Health & Fitness > Medicine",
   other: {
     "podcast:category": "Health & Fitness > Medicine",
     "podcast:explicit": "false",
     "podcast:author": "Dr. Patrícia Mota, PT, PhD",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "JBUS Podcast",
+    "mobile-web-app-capable": "yes",
   },
 };
 
@@ -105,8 +137,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={outfit.variable}>
-      <body className={outfit.className}>
+    <html lang="en" className={outfit.variable} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://d3t3ozftmdmh3i.cloudfront.net" />
+        <link rel="preconnect" href="https://megaphone.imgix.net" />
+        <link rel="dns-prefetch" href="https://anchor.fm" />
+      </head>
+      <body className={outfit.className} suppressHydrationWarning>
         <QueryProvider>
           <TooltipProvider>
             {children}
