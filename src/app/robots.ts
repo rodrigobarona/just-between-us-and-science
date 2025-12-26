@@ -18,3 +18,6 @@ export default function robots(): MetadataRoute.Robots {
   }
 }
 
+// Note: llm.txt is referenced in the file itself and doesn't need to be in robots.txt
+// AI crawlers will discover it at /llm.txt based on convention
+
