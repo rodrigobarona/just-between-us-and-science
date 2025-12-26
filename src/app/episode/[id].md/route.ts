@@ -7,22 +7,19 @@ import {
   HOST,
   PRODUCER,
 } from "@/lib/schema";
+import type { NextRequest } from "next/server";
 
 // Use edge runtime for faster global response times
 export const runtime = "edge";
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 export const revalidate = 3600; // Revalidate every hour
 
-export async function generateStaticParams() {
-  const episodes = await getEpisodes();
-  return episodes.map((ep) => ({ id: ep.id }));
-}
-
 export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  _request: NextRequest,
+  context: { params: Promise<Record<string, string | string[]>> }
 ) {
-  const { id } = await params;
+  const params = await context.params;
+  const id = params.id as string;
   const episode = await getEpisode(id);
 
   if (!episode) {

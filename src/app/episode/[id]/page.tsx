@@ -97,6 +97,15 @@ export async function generateMetadata({
       ],
       locale: "en_US",
     },
+    other: {
+      "article:author": HOST.fullName,
+      "article:published_time": episode.pubDate,
+      "article:modified_time": episode.pubDate,
+      "article:section": "Health & Fitness",
+      ...(episodeKeywords.length > 0 && {
+        "article:tag": episodeKeywords.join(", "),
+      }),
+    },
     twitter: {
       card: "summary_large_image",
       site: "@patimota",

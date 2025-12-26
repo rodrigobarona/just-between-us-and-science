@@ -11,7 +11,7 @@ import {
 
 // Use edge runtime for faster global response times
 export const runtime = "edge";
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 export const revalidate = 3600; // Revalidate every hour
 
 export async function GET() {

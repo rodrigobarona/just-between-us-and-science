@@ -129,6 +129,7 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-status-bar-style": "default",
     "apple-mobile-web-app-title": "JBUS Podcast",
     "mobile-web-app-capable": "yes",
+    "format-detection": "telephone=no",
   },
 };
 

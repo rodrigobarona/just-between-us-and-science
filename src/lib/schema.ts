@@ -169,9 +169,24 @@ export function buildPodcastEpisodeSchema(
       contentUrl: episode.audioUrl,
       encodingFormat: "audio/mpeg",
       duration: isoDuration,
+      name: episode.title,
+      description: cleanDescription,
       ...(episode.audioSize && {
         contentSize: `${Math.round(episode.audioSize / 1024 / 1024)}MB`,
       }),
+      // Add potential action for audio playback
+      potentialAction: {
+        "@type": "ListenAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: episode.audioUrl,
+          actionPlatform: [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/IOSPlatform",
+            "https://schema.org/AndroidPlatform",
+          ],
+        },
+      },
     },
     // Link to markdown/transcript endpoint for LLMs and accessibility
     subjectOf: {
@@ -179,6 +194,7 @@ export function buildPodcastEpisodeSchema(
       url: episodeMdUrl,
       name: `${episode.title} - Show Notes & Transcript`,
       description: "Detailed show notes and episode content in markdown format",
+      inLanguage: "en-US",
     },
     // Producer/Sponsor ("Brought to you by Eleva Care")
     publisher: {
