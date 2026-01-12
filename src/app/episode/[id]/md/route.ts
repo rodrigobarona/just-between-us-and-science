@@ -185,3 +185,4 @@ Last Updated: ${formattedDate}
     },
   });
 }
+
