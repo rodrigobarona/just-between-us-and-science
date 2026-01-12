@@ -42,15 +42,27 @@ This is the official website for "${SITE_TITLE}," a women's health podcast. ${SI
 ## Host
 
 **${HOST.fullName}**
-- ${HOST.description}
-- Evidence-based approach to health education
-- X/Twitter: @patimota
+
+${HOST.description}. Evidence-based approach to health education.
+
+| Platform | URL |
+|----------|-----|
+| X/Twitter | ${HOST.twitter} |
+| Instagram | ${HOST.instagram} |
+| LinkedIn | ${HOST.linkedin} |
+| Google Scholar | ${HOST.google_scholar} |
+| ResearchGate | ${HOST.researchgate} |
+| ORCID | ${HOST.orcid} |
+| Scopus | ${HOST.scopus} |
+| Ciência Vitae | ${HOST.cienciavitae} |
 
 ## Producer
 
 **${PRODUCER.name}** — ${PRODUCER.url}
 
-The podcast is brought to you by ${PRODUCER.name}, supporting women's health education and research.
+The podcast is brought to you by ${
+    PRODUCER.name
+  }, supporting women's health education and research.
 
 ## Content Focus
 
@@ -125,7 +137,9 @@ No authentication required. Standard CDN caching applies:
 ## Contact
 
 - Website: ${BASE_URL}
-- X/Twitter: @patimota
+- X/Twitter: ${HOST.twitter}
+- Instagram: ${HOST.instagram}
+- LinkedIn: ${HOST.linkedin}
 - Producer: ${PRODUCER.name} (${PRODUCER.url})
 
 ---
@@ -141,4 +155,3 @@ Last Updated: ${new Date().toISOString()}
     },
   });
 }
-

@@ -95,7 +95,14 @@ ${SITE_DESCRIPTION}
 
 ${HOST.description}
 
-- X/Twitter: [@patimota](${HOST.twitter})
+| Platform | Link |
+|----------|------|
+| Instagram | ${HOST.instagram} |
+| X/Twitter | ${HOST.twitter} |
+| LinkedIn | ${HOST.linkedin} |
+| Google Scholar | ${HOST.google_scholar} |
+| ResearchGate | ${HOST.researchgate} |
+| ORCID | ${HOST.orcid} |
 
 ---
 

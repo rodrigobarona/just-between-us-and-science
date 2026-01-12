@@ -33,6 +33,14 @@ export const HOST = {
   description:
     "Physical Therapist and PhD specializing in women's health research",
   twitter: "https://x.com/patimota",
+  instagram: "https://www.instagram.com/patricia_mota_pt_phd/",
+  linkedin: "https://www.linkedin.com/in/patimota/",
+  researchgate: "https://www.researchgate.net/profile/Patricia-Mota-4",
+  cienciavitae: "https://www.cienciavitae.pt/portal/en/C01F-4E85-4D21",
+  orcid: "https://orcid.org/0000-0003-2120-7783",
+  scopus: "https://www.scopus.com/authid/detail.uri?authorId=55502804700",
+  google_scholar:
+    "https://scholar.google.com/citations?user=fNJsrScAAAAJ&hl=en",
 } as const;
 
 // Producer/Sponsor information
@@ -127,7 +135,17 @@ export function buildPodcastSeriesSchema(): WithContext<PodcastSeries> {
       name: HOST.name,
       jobTitle: HOST.credentials,
       description: HOST.description,
-      sameAs: [PLATFORM_LINKS.youtube, HOST.twitter],
+      sameAs: [
+        HOST.twitter,
+        HOST.instagram,
+        HOST.linkedin,
+        HOST.google_scholar,
+        HOST.researchgate,
+        HOST.orcid,
+        HOST.scopus,
+        HOST.cienciavitae,
+        PLATFORM_LINKS.youtube,
+      ],
     },
     genre: ["Health", "Science", "Education", "Women's Health"],
     keywords:
@@ -271,7 +289,15 @@ export function buildPodcastEpisodeSchema(
       "@type": "Person",
       name: HOST.name,
       jobTitle: HOST.credentials,
-      sameAs: [HOST.twitter, PLATFORM_LINKS.youtube],
+      sameAs: [
+        HOST.twitter,
+        HOST.instagram,
+        HOST.linkedin,
+        HOST.google_scholar,
+        HOST.researchgate,
+        HOST.orcid,
+        PLATFORM_LINKS.youtube,
+      ],
     },
     // Keywords/topics from episode metadata
     ...(episode.keywords?.length && {
