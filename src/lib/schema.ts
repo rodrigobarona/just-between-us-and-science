@@ -1,4 +1,10 @@
-import type { PodcastSeries, PodcastEpisode, WithContext } from "schema-dts";
+import type {
+  PodcastSeries,
+  PodcastEpisode,
+  WithContext,
+  WebSite,
+  BreadcrumbList,
+} from "schema-dts";
 import type { Episode } from "./rss";
 import { formatISO8601Duration } from "./rss";
 
@@ -35,6 +41,60 @@ export const PRODUCER = {
   url: "https://eleva.care",
   logo: "/assets/eleva-care-logo-white.png",
 } as const;
+
+/**
+ * Build WebSite schema for the homepage
+ * Helps search engines understand the site structure
+ */
+export function buildWebSiteSchema(): WithContext<WebSite> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${BASE_URL}/#website`,
+    name: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: BASE_URL,
+    inLanguage: "en-US",
+    publisher: {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      name: PRODUCER.name,
+      url: PRODUCER.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}${PRODUCER.logo}`,
+      },
+    },
+  };
+}
+
+/**
+ * Build BreadcrumbList schema for episode pages
+ * Helps search engines understand navigation hierarchy
+ */
+export function buildBreadcrumbSchema(
+  episodeTitle: string,
+  episodeId: string
+): WithContext<BreadcrumbList> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: BASE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: episodeTitle,
+        item: `${BASE_URL}/episode/${episodeId}`,
+      },
+    ],
+  };
+}
 
 export function buildPodcastSeriesSchema(): WithContext<PodcastSeries> {
   return {

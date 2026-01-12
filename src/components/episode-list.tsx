@@ -14,13 +14,24 @@ export function EpisodeList({ initialEpisodes }: EpisodeListProps) {
 
   return (
     <>
-      <div className="space-y-6">
-        {initialEpisodes.map((episode) => (
-          <EpisodeCard
+      <div 
+        className="space-y-6" 
+        role="feed" 
+        aria-label="Episode list"
+        aria-busy="false"
+      >
+        {initialEpisodes.map((episode, index) => (
+          <div
             key={episode.id}
-            episode={episode}
-            onPlay={() => setCurrentEpisode(episode)}
-          />
+            role="article"
+            aria-posinset={index + 1}
+            aria-setsize={initialEpisodes.length}
+          >
+            <EpisodeCard
+              episode={episode}
+              onPlay={() => setCurrentEpisode(episode)}
+            />
+          </div>
         ))}
       </div>
 

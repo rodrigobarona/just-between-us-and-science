@@ -83,22 +83,25 @@ export function EpisodePageContent({
   const pageUrl = `${BASE_URL}/episode/${episode.id}`;
 
   return (
-    <div className="min-h-screen pb-24">
+    <main id="main-content" className="min-h-screen pb-24">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Sidebar - Sticky on desktop */}
-          <aside className="w-full lg:w-[400px] lg:flex-shrink-0 space-y-8 lg:sticky lg:top-8 lg:self-start lg:max-h-[calc(100vh-4rem)]">
+          <aside
+            className="w-full lg:w-[400px] lg:shrink-0 space-y-8 lg:sticky lg:top-8 lg:self-start lg:max-h-[calc(100vh-4rem)]"
+            aria-label="Podcast information and actions"
+          >
             <PodcastHeader />
             <PlatformLinks />
 
             {/* Quick Actions */}
-            <div className="space-y-3">
+            <nav className="space-y-3" aria-label="Episode actions">
               <Button
                 onClick={() => setCurrentEpisode(episode)}
                 className="w-full bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
                 size="lg"
               >
-                <Play className="w-5 h-5" />
+                <Play className="w-5 h-5" aria-hidden="true" />
                 <span>Listen Now</span>
               </Button>
 
@@ -107,48 +110,53 @@ export function EpisodePageContent({
                 variant="outline"
                 className="w-full gap-2 border-input bg-background hover:bg-accent hover:text-accent-foreground"
               >
-                <Share2 className="w-4 h-4" />
+                <Share2 className="w-4 h-4" aria-hidden="true" />
                 <span>Share Episode</span>
               </Button>
-            </div>
+            </nav>
           </aside>
 
           {/* Episode Content */}
-          <article className="flex-1 min-w-0 space-y-6">
-            {/* Back to Episodes Button */}
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 hover:bg-accent/10 rounded-md px-2.5 h-9 text-sm transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Back to Episodes</span>
-            </Link>
+          <article
+            className="flex-1 min-w-0 space-y-6"
+            aria-labelledby="episode-title"
+          >
+            {/* Breadcrumb Navigation */}
+            <nav aria-label="Breadcrumb">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 hover:bg-accent/10 rounded-md px-2.5 h-9 text-sm transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+                <span>Back to Episodes</span>
+              </Link>
+            </nav>
 
             {/* Episode Image */}
             {episode.imageUrl && (
-              <div className="rounded-lg overflow-hidden shadow-lg aspect-square bg-muted relative">
+              <figure className="rounded-lg overflow-hidden shadow-lg aspect-square bg-muted relative">
                 <Image
                   src={episode.imageUrl}
-                  alt={episode.title}
+                  alt={`Cover art for ${episode.title}`}
                   fill
                   className="object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 800px, 800px"
                 />
-              </div>
+              </figure>
             )}
 
             {/* Episode Details Card */}
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 md:p-8">
               {/* Episode Header */}
-              <div className="mb-6">
+              <header className="mb-6">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground mb-3">
                   <time dateTime={episode.pubDate}>
                     {formatDate(episode.pubDate)}
                   </time>
                   {formatDuration(episode.duration) && (
                     <>
-                      <span>•</span>
+                      <span aria-hidden="true">•</span>
                       <span>{formatDuration(episode.duration)}</span>
                     </>
                   )}
@@ -162,14 +170,24 @@ export function EpisodePageContent({
                   )}
                 </div>
 
-                <h1 className="text-4xl font-bold text-card-foreground mb-4 leading-tight">
+                <h1
+                  id="episode-title"
+                  className="text-4xl font-bold text-card-foreground mb-4 leading-tight"
+                >
                   {episode.title}
                 </h1>
 
                 {/* Guest Info */}
                 {episode.guest && (
-                  <div className="flex items-center gap-3 mt-4 p-3 bg-accent/10 rounded-lg">
-                    <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">
+                  <div
+                    className="flex items-center gap-3 mt-4 p-3 bg-accent/10 rounded-lg"
+                    role="group"
+                    aria-label="Featured guest information"
+                  >
+                    <div
+                      className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold"
+                      aria-hidden="true"
+                    >
                       {episode.guest.name.charAt(0)}
                     </div>
                     <div>
@@ -181,7 +199,10 @@ export function EpisodePageContent({
                       </p>
                     </div>
                     {episode.guest.links && episode.guest.links.length > 0 && (
-                      <div className="ml-auto flex gap-2">
+                      <nav
+                        className="ml-auto flex gap-2"
+                        aria-label="Guest social links"
+                      >
                         {episode.guest.links.map((link) => (
                           <a
                             key={link.platform}
@@ -191,25 +212,34 @@ export function EpisodePageContent({
                             className="text-xs text-accent hover:underline"
                           >
                             {link.platform}
+                            <span className="sr-only"> (opens in new tab)</span>
                           </a>
                         ))}
-                      </div>
+                      </nav>
                     )}
                   </div>
                 )}
-              </div>
+              </header>
 
               {/* Show Notes */}
-              <div
-                className="prose prose-lg max-w-none prose-headings:text-card-foreground prose-p:text-card-foreground/90 prose-strong:text-card-foreground prose-ul:text-card-foreground/90 prose-li:text-card-foreground/90"
-                dangerouslySetInnerHTML={{ __html: cleanDescription }}
-              />
+              <section aria-label="Show notes">
+                <div
+                  className="prose prose-lg max-w-none prose-headings:text-card-foreground prose-p:text-card-foreground/90 prose-strong:text-card-foreground prose-ul:text-card-foreground/90 prose-li:text-card-foreground/90"
+                  dangerouslySetInnerHTML={{ __html: cleanDescription }}
+                />
+              </section>
             </div>
 
             {/* Chapters */}
             {episode.chapters && episode.chapters.length > 0 && (
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-card-foreground mb-4">
+              <section
+                className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 md:p-8"
+                aria-labelledby="chapters-heading"
+              >
+                <h2
+                  id="chapters-heading"
+                  className="text-2xl font-bold text-card-foreground mb-4"
+                >
                   Chapters
                 </h2>
                 <ChapterList
@@ -217,13 +247,19 @@ export function EpisodePageContent({
                   onSeek={handleChapterSeek}
                   currentTime={currentTime}
                 />
-              </div>
+              </section>
             )}
 
             {/* Related Episodes */}
             {relatedEpisodes.length > 0 && (
-              <div className="mt-12">
-                <h2 className="text-2xl font-bold text-foreground mb-6">
+              <section
+                className="mt-12"
+                aria-labelledby="related-episodes-heading"
+              >
+                <h2
+                  id="related-episodes-heading"
+                  className="text-2xl font-bold text-foreground mb-6"
+                >
                   More Episodes
                 </h2>
                 <div className="space-y-4">
@@ -233,31 +269,33 @@ export function EpisodePageContent({
                       href={`/episode/${ep.id}`}
                       className="block p-4 rounded-lg border border-border hover:bg-accent/5 transition-colors"
                     >
-                      <div className="flex gap-4">
+                      <article className="flex gap-4">
                         {ep.imageUrl && (
                           <Image
                             src={ep.imageUrl}
-                            alt={ep.title}
+                            alt=""
                             width={80}
                             height={80}
                             sizes="80px"
-                            className="w-20 h-20 rounded object-cover flex-shrink-0"
+                            className="w-20 h-20 rounded object-cover shrink-0"
                             loading="lazy"
                           />
                         )}
                         <div className="flex-1 min-w-0">
                           <p className="text-sm text-muted-foreground mb-1">
-                            {formatDate(ep.pubDate)}
+                            <time dateTime={ep.pubDate}>
+                              {formatDate(ep.pubDate)}
+                            </time>
                           </p>
                           <h3 className="font-semibold text-foreground line-clamp-2">
                             {ep.title}
                           </h3>
                         </div>
-                      </div>
+                      </article>
                     </Link>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
           </article>
         </div>
@@ -276,6 +314,6 @@ export function EpisodePageContent({
         title={episode.title}
         url={pageUrl}
       />
-    </div>
+    </main>
   );
 }

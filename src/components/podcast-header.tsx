@@ -2,7 +2,8 @@ import Image from "next/image";
 
 export function PodcastHeader() {
   return (
-    <div className="space-y-8">
+    <header className="space-y-8">
+      {/* Logo and Tagline */}
       <div>
         <div className="w-full aspect-200/60 relative">
           <Image
@@ -14,13 +15,14 @@ export function PodcastHeader() {
             sizes="(max-width: 768px) 100vw, 400px"
           />
         </div>
-        <p className="text-foreground/95 text-2xl font-light mt-6 text-center">
+        <p className="text-foreground/95 text-2xl font-light mt-6 text-center" aria-label="Podcast tagline">
           The Women&apos;s Health Lab
         </p>
       </div>
 
-      <div>
-        <h2 className="text-2xl font-bold text-foreground mb-4">
+      {/* About Section */}
+      <section aria-labelledby="about-podcast-heading">
+        <h2 id="about-podcast-heading" className="text-2xl font-bold text-foreground mb-4">
           About the Podcast
         </h2>
         <p className="text-foreground/90 leading-relaxed mb-4">
@@ -36,10 +38,11 @@ export function PodcastHeader() {
           healthcare professionals, and anyone curious about how our bodies
           really work.
         </p>
-      </div>
+      </section>
 
-      <div>
-        <h3 className="text-lg font-bold text-foreground mb-3">Presented by</h3>
+      {/* Sponsor Section */}
+      <section aria-labelledby="presented-by-heading">
+        <h3 id="presented-by-heading" className="text-lg font-bold text-foreground mb-3">Presented by</h3>
         <a
           href="https://eleva.care"
           target="_blank"
@@ -53,8 +56,9 @@ export function PodcastHeader() {
             height={48}
             className="h-10 w-auto opacity-90"
           />
+          <span className="sr-only"> (opens in new tab)</span>
         </a>
-      </div>
-    </div>
+      </section>
+    </header>
   );
 }

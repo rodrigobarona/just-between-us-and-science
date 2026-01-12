@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
 import {
   buildPodcastEpisodeSchema,
+  buildBreadcrumbSchema,
   BASE_URL,
   SHARE_IMAGE,
   SITE_TITLE,
@@ -150,6 +151,7 @@ export default async function EpisodePage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd data={buildBreadcrumbSchema(episode.title, episode.id)} />
       <JsonLd data={buildPodcastEpisodeSchema(episode)} />
       <EpisodePageContent episode={episode} relatedEpisodes={relatedEpisodes} />
     </>

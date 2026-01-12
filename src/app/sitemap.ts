@@ -30,7 +30,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 1,
     },
-    // LLM-friendly markdown endpoints
+    // LLM-friendly endpoints
+    {
+      url: `${BASE_URL}/llm.txt`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
     {
       url: `${BASE_URL}/episodes.md`,
       lastModified: new Date(),
